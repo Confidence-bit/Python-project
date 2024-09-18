@@ -1,0 +1,67 @@
+recipes = []
+
+def add_recipe():
+    name = input("Enter recipe name: ")
+    ingredients = input("Enter ingredients (comma-separated): ").split(',')
+    instructions = input("Enter instructions: ")
+    recipes.append({"Name": name, "Ingredients": ingredients, "Instructions": instructions})
+
+def view_recipes():
+    for recipe in recipes:
+        print(f"Name: {recipe['Name']}")
+        print(f"Ingredients: {', '.join(recipe['Ingredients'])}")
+        print(f"Instructions: {recipe['Instructions']}\n")
+
+def search_by_ingredient():
+    ingredient = input("Enter ingredient to search: ")
+    found_recipes = [recipe for recipe in recipes if ingredient in recipe["Ingredients"]]
+    if found_recipes:
+        view_recipes(found_recipes)
+    else:
+        print("No recipes found.")
+
+def search_by_keyword():
+    keyword = input("Enter keyword to search: ")
+    found_recipes = [recipe for recipe in recipes if keyword in recipe["Name"] or keyword in recipe["Instructions"]]
+    if found_recipes:
+        view_recipes(found_recipes)
+    else:
+        print("No recipes found.")
+
+def shopping_list():
+    ingredients = set()
+    for recipe in recipes:
+        ingredients.update(recipe["Ingredients"])
+    print("Shopping List:")
+    for ingredient in ingredients:
+        print(ingredient)
+
+def main():
+    while True:
+        print("\n1. Add recipe")
+        print("2. View recipes")
+        print("3. Search by ingredient")
+        print("4. Search by keyword")
+        print("5. Shopping list")
+        print("6. Exit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            add_recipe()
+        elif choice == "2":
+            view_recipes()
+        elif choice == "3":
+            search_by_ingredient()
+        elif choice == "4":
+            search_by_keyword()
+        elif choice == "5":
+            shopping_list()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+

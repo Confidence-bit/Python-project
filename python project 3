@@ -1,0 +1,52 @@
+import random
+movies = {
+    "Action": ["The Matrix", "Inception", "Mad Max"],
+    "Comedy": ["The Hangover", "Superbad", "Bridesmaids"],
+    "Romance": ["Titanic", "La La Land", "Crazy Rich Asians"],
+    "Horror": ["The Shining", "The Exorcist", "Get Out"]
+}
+
+user_ratings = {}
+def get_recommendations(genre):
+    return movies[genre]
+
+def get_random_recommendation(genre):
+    return random.choice(movies[genre])
+
+def rate_movie(movie, rating):
+    user_ratings[movie] = rating
+
+def get_user_ratings():
+    return user_ratings
+
+def main():
+    print("Movie Recommendation System")
+    while True:
+        print("\n1. Get recommendations by genre")
+        print("2. Get random recommendation by genre")
+        print("3. Rate a movie")
+        print("4. View user ratings")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            genre = input("Enter a genre: ")
+            print(get_recommendations(genre))
+        elif choice == "2":
+            genre = input("Enter a genre: ")
+            print(get_random_recommendation(genre))
+        elif choice == "3":
+            movie = input("Enter a movie title: ")
+            rating = int(input("Enter your rating (1-5): "))
+            rate_movie(movie, rating)
+        elif choice == "4":
+            print(get_user_ratings())
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+

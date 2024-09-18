@@ -1,0 +1,70 @@
+print("--------Inventory Management System----------")
+
+inventory = {}
+def add_item():
+    item = input("Enter item name: ")
+    quantity = int(input("Enter quantity: "))
+    if item in inventory:
+        inventory[item] += quantity
+    else:
+        inventory[item] = quantity
+    print(f"Added {quantity} {item}(s) to inventory.")
+
+def remove_item():
+    item = input("Enter item name: ")
+    if item in inventory:
+        quantity = int(input("Enter quantity to remove: "))
+        if quantity <= inventory[item]:
+            inventory[item] -= quantity
+            print(f"Removed {quantity} {item}(s) from inventory.")
+        else:
+            print("Not enough quantity in stock.")
+    else:
+        print("Item not found in inventory.")
+
+def update_item():
+    item = input("Enter item name: ")
+    if item in inventory:
+        quantity = int(input("Enter new quantity: "))
+        inventory[item] = quantity
+        print(f"Updated {item} quantity to {quantity}.")
+    else:
+        print("Item not found in inventory.")
+
+def print_inventory():
+    print("Current Inventory:")
+    for item, quantity in inventory.items():
+        print(f"{item}: {quantity}")
+
+def calculate_stock_value():
+    stock_value = 0
+    for item, quantity in inventory.items():
+        price = float(input(f"Enter price of {item}: "))
+        stock_value += price * quantity
+    print(f"Total stock value: ${stock_value:.2f}")
+
+while True:
+    print("\nInventory Management System")
+    print("1. Add Item")
+    print("2. Remove Item")
+    print("3. Update Item")
+    print("4. Print Inventory")
+    print("5. Calculate Stock Value")
+    print("6. Exit")
+    choice = input("Enter choice: ")
+    if choice == "1":
+        add_item()
+    elif choice == "2":
+        remove_item()
+    elif choice == "3":
+        update_item()
+    elif choice == "4":
+        print_inventory()
+    elif choice == "5":
+        calculate_stock_value()
+    elif choice == "6":
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+

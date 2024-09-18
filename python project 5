@@ -1,0 +1,59 @@
+budget = {
+    "Food": [],
+    "Rent": [],
+    "Entertainment": [],
+    "Transportation": [],
+    "Other": []
+}
+
+def add_expense(category, amount):
+    budget[category].append(amount)
+
+def calculate_total_expenses():
+    total = 0
+    for category, expenses in budget.items():
+        total += sum(expenses)
+        print(f"{category}: ${sum(expenses):.2f}")
+    print(f"Total: ${total:.2f}")
+
+def identify_areas_to_cut_back():
+    for category, expenses in budget.items():
+        if sum(expenses) > 0.3 * calculate_total_expenses():
+            print(f"Consider cutting back on {category}")
+
+def compare_monthly_expenses(previous_budget):
+    for category, expenses in budget.items():
+        previous_expenses = previous_budget.get(category, [])
+        if sum(expenses) > sum(previous_expenses):
+            print(f"{category} expenses increased by ${sum(expenses) - sum(previous_expenses):.2f}")
+        elif sum(expenses) < sum(previous_expenses):
+            print(f"{category} expenses decreased by ${sum(previous_expenses) - sum(expenses):.2f}")
+
+def main():
+    while True:
+        print("\n1. Add expense")
+        print("2. Calculate total expenses")
+        print("3. Identify areas to cut back")
+        print("4. Compare monthly expenses")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            category = input("Enter category: ")
+            amount = float(input("Enter amount: "))
+            add_expense(category, amount)
+        elif choice == "2":
+            calculate_total_expenses()
+        elif choice == "3":
+            identify_areas_to_cut_back()
+        elif choice == "4":
+            previous_budget = input("Enter previous budget (JSON format): ")
+            compare_monthly_expenses(eval(previous_budget))
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
